@@ -8,6 +8,9 @@ const flash = require('connect-flash')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
+const {
+  dateFormat
+} = require('./helpers/helpers')
 
 
 
@@ -26,6 +29,10 @@ app.use(methodOverride('_method'))
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, './views'))
 hbs.registerPartials(__dirname + '/views/partials');
+
+//registering helper functions
+hbs.registerHelper('dateFormat', dateFormat)
+
 
 app.use(session({
   secret: 'thisisatemplate',

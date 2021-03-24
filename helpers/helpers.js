@@ -1,3 +1,4 @@
+const moment = require('moment')
 module.exports = {
   userAuth: function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -5,5 +6,8 @@ module.exports = {
     } else {
       res.redirect('/login')
     }
+  },
+  dateFormat: function(date, format) {
+    return moment(date).format(format)
   }
 }
