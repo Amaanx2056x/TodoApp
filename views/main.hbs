@@ -17,11 +17,14 @@
               <i class="fa fa-tasks"></i>&nbsp;Task List
 
             </div>
-            <div class="badge badge-pill badge-success ml-3">
-              {{logged.username}}
+            <div style="float:right;">
+              <div class="badge badge-pill badge-success ml-3">
+                {{logged.username}}
+              </div>
+              <button id="logout-toggler" class="border-0 btn-transition btn btn-outline-danger"><i class="fa fa-power-off"></i> </button>
             </div>
-            <button id="logout-toggler" class="border-0 btn-transition btn btn-outline-danger"><i class="fa fa-power-off"></i> </button>
           </div>
+
           <div class="boxed scroll-area-sm">
             <perfect-scrollbar class="ps-show-limits">
               <div style="position: static;" class="ps ps--active-y">
@@ -56,9 +59,11 @@
                             </div>
                           </div>
                           <div class="widget-content-right">
-                            {{#unless completed}}
+                            {{#if completed}}
+                            <button data-id="{{id}}" id="markUndo" class="border-0 btn-transition btn btn-outline-warning"> <i class="fa fa-undo"></i></button>
+                            {{else}}
                             <button data-id="{{id}}" id="markDone" class="border-0 btn-transition btn btn-outline-success"> <i class="fa fa-check"></i></button>
-                            {{/unless}}
+                            {{/if}}
                             <button data-id="{{id}}" class="deleteTask border-0 btn-transition btn btn-outline-danger"> <i class="fa fa-trash"></i> </button>
                           </div>
                         </div>

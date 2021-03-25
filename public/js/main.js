@@ -153,6 +153,23 @@ $(document).ready(function() {
       })
 
     })
+  //mark Undo
+  $(document).on('click',
+    "#markUndo",
+    function () {
+      var id = $(this).attr("data-id")
+      $.post('/task/mark-undo', {
+        id: id.toString()
+      })
+      .done(function(data) {
+        $('.boxed').load(location.href + " .boxed");
+      })
+      .fail(function() {
+        alert("failed")
+      })
+    })
+
+
 
 
   //add a new task
@@ -170,29 +187,6 @@ $(document).ready(function() {
         $("#todo-title").val('')
         $("#todo-text").val('')
         $("#todo-modal").modal('hide')
-        $("#tasklist").prepend(`<li class="list-group-item">
-
-          <div class="todo-indicator bg-warning"></div>
-          <div class="widget-content p-0">
-          <div class="widget-content-wrapper">
-          <div class="widget-content-left mr-2">
-          </div>
-          <div data-id="${data.id}" class="singleTask widget-content-left">
-          <div class="widget-heading">
-          ${data.title}
-          </div>
-          <div class="widget-subheading">
-          <i>${data.createdAt}</i>
-          </div>
-          </div>
-          <div class="widget-content-right">
-
-          <button data-id="${data.id}" id="markDone" class="border-0 btn-transition btn btn-outline-success"> <i class="fa fa-check"></i></button>
-          <button data-id="${data.id}" class="deleteTask border-0 btn-transition btn btn-outline-danger"> <i class="fa fa-trash"></i> </button>
-          </div>
-          </div>
-          </div>
-          </li>`)
         $('.boxed').load(location.href + " .boxed");
       })
       .fail(function() {

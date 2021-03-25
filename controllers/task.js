@@ -68,9 +68,29 @@ const mark_done = (req, res)=> {
   }))
 
 }
+
+
+const mark_undo = (req, res)=> {
+  Task.findOne({
+    _id: req.body.id
+  })
+  .then((task=> {
+    task.completed = false
+    task.save().then((saved=> {
+      res.send(saved)
+    }))
+  }))
+  .catch((err=> {
+    console.error(err)
+    req.flash('error_msg', 'Unknown error')
+    res.redirect('/')
+  }))
+
+}
 module.exports = {
   add_task,
   get_task,
   delete_task,
-  mark_done
+  mark_done,
+  mark_undo
 }
